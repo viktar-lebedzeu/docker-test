@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: docker-test
+  mustache:
+    check-template-location: false
+
+server:
+  port: 8100
+
+application:
+  groupId: ${project.groupId}
+  name: ${project.artifactId}
+  version: ${project.version}
+  description: ${project.description}
