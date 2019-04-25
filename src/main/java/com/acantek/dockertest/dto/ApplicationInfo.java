@@ -1,15 +1,15 @@
 package com.acantek.dockertest.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Viktar Lebedzeu
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Component
+@ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)
 public class ApplicationInfo {
     /** Group Id */
     private String groupId;
