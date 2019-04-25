@@ -1,0 +1,6 @@
+# Git ignored files and folders
+
+\.idea/
+target/
+
+*.iml
