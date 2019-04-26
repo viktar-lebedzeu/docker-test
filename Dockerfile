@@ -1,7 +1,14 @@
 # Pull base image
 FROM openjdk:8-stretch
+MAINTAINER Viktar Lebedzeu <vlebedzeu@gmail.com>
+
+# Add Maven dependencies (not shaded into the artifact; Docker-cached)
+# ADD target/lib /usr/share/lib
+
 # Copy compiled jar into image
-COPY ./target/docker-test.jar docker-test.jar
+ARG JAR_FILE
+COPY target/${JAR_FILE} ${JAR_FILE}
+
 # Expose ports
 EXPOSE 8100
 

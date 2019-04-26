@@ -17,7 +17,13 @@
 	<description>Docker test project for Spring Boot</description>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+
+		<!-- -->
+		<dockerfile-maven.version>1.4.10</dockerfile-maven.version>
+
 	</properties>
 
 	<dependencies>
@@ -88,6 +94,31 @@
 					</delimiters>
 					-->
 					<useDefaultDelimiters>true</useDefaultDelimiters>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>${dockerfile-maven.version}</version>
+<!--
+				<executions>
+					<execution>
+						<id>default</id>
+						<goals>
+							<goal>build</goal>
+							<goal>push</goal>
+						</goals>
+					</execution>
+				</executions>
+-->
+				<configuration>
+					<dockerfile>Dockerfile</dockerfile>
+					<repository>viktarlebedzeu/${project.build.finalName}</repository>
+					<tag>${project.version}</tag>
+					<buildArgs>
+						<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+					</buildArgs>
 				</configuration>
 			</plugin>
 		</plugins>
