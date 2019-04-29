@@ -1,4 +1,4 @@
-package com.acantek.dockertest.dockertest.dto;
+package com.acantek.dockertest.dto;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

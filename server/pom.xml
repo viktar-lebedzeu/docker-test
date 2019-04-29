@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>docker-test</artifactId>
+		<groupId>com.acantek</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>docker-test-server</artifactId>
+	<packaging>jar</packaging>
+	<description>
+		Server subproject. Contains server-wide configurations, e.g. balance loading, naming, health checking etc.
+	</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.restdocs</groupId>
+			<artifactId>spring-restdocs-mockmvc</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<resources>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<!--
+					<delimiters>
+						<delimiter>@</delimiter>
+					</delimiters>
+					-->
+					<useDefaultDelimiters>true</useDefaultDelimiters>
+				</configuration>
+			</plugin>
+
+
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>${docker.maven.version}</version>
+				<configuration>
+					<verbose>true</verbose>
+					<images>
+						<image>
+							<alias>docker-test-server</alias>
+							<name>viktarlebedzeu/${project.artifactId}:${project.version}</name>
+							<build>
+								<from>openjdk:8-stretch</from>
+								<maintainer>Viktar Lebedzeu &lt;vlebedzeu@gmail.com&gt;</maintainer>
+								<tags>
+									<tag>${project.version}</tag>
+									<tag>latest</tag>
+								</tags>
+								<assembly>
+									<name>target</name>
+									<targetDir>/opt/server</targetDir>
+									<descriptorRef>artifact</descriptorRef>
+								</assembly>
+<!--
+								<runCmds>
+									<run>ls -lah /</run>
+									<run>ls -lah /opt</run>
+									<run>ls -lah /opt/server</run>
+								</runCmds>
+								<optimise>true</optimise>
+-->
+								<ports>
+									<port>8100/tcp</port>
+								</ports>
+								<cmd>
+									<shell>java -jar /opt/server/${project.build.finalName}.jar</shell>
+								</cmd>
+							</build>
+						</image>
+					</images>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>${dockerfile-maven.version}</version>
+				<configuration>
+					<dockerfile>Dockerfile</dockerfile>
+					<repository>viktarlebedzeu/${project.build.finalName}</repository>
+					<tag>${project.version}</tag>
+<!--
+					<buildArgs>
+						<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+					</buildArgs>
+-->
+				</configuration>
+			</plugin>
+		</plugins>
+
+	</build>
+
+</project>

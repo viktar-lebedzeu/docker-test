@@ -2,13 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<packaging>pom</packaging>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.1.4.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
+
+	<modules>
+		<module>server</module>
+		<module>common</module>
+	</modules>
 
 	<groupId>com.acantek</groupId>
 	<artifactId>docker-test</artifactId>
@@ -22,107 +28,19 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 
-		<!-- -->
+		<!-- 3rd party libraries versions -->
+		<docker.maven.version>0.30.0</docker.maven.version>
 		<dockerfile-maven.version>1.4.10</dockerfile-maven.version>
-
+		<docker-compose-maven.version>2.4.0</docker-compose-maven.version>
 	</properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-aop</artifactId>
-		</dependency>
-<!--
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-mustache</artifactId>
-		</dependency>
--->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.restdocs</groupId>
-			<artifactId>spring-restdocs-mockmvc</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
 	<build>
-		<finalName>${project.artifactId}</finalName>
-		<resources>
-			<resource>
-				<directory>${basedir}/src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
-
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<configuration>
-					<!--
-					<delimiters>
-						<delimiter>@</delimiter>
-					</delimiters>
-					-->
-					<useDefaultDelimiters>true</useDefaultDelimiters>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>com.spotify</groupId>
-				<artifactId>dockerfile-maven-plugin</artifactId>
-				<version>${dockerfile-maven.version}</version>
-<!--
-				<executions>
-					<execution>
-						<id>default</id>
-						<goals>
-							<goal>build</goal>
-							<goal>push</goal>
-						</goals>
-					</execution>
-				</executions>
--->
-				<configuration>
-					<dockerfile>Dockerfile</dockerfile>
-					<repository>viktarlebedzeu/${project.build.finalName}</repository>
-					<tag>${project.version}</tag>
-					<buildArgs>
-						<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
-					</buildArgs>
-				</configuration>
+				<groupId>com.dkanejs.maven.plugins</groupId>
+				<artifactId>docker-compose-maven-plugin</artifactId>
+				<version>${docker-compose-maven.version}</version>
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

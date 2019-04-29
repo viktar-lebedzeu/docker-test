@@ -1,6 +1,6 @@
 spring:
   application:
-    name: docker-test
+    name: docker-test-server
   mustache:
     check-template-location: false
 
