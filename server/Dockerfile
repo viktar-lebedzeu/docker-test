@@ -6,13 +6,16 @@ MAINTAINER Viktar Lebedzeu <vlebedzeu@gmail.com>
 # ADD target/lib /usr/share/lib
 
 # Copy compiled jar into image
-# ARG JAR_FILE
-# COPY target/${JAR_FILE} ${JAR_FILE}
-COPY target/docker-test-server.jar docker-test-server.jar
+ARG JAR_FILE=docker-test-server.jar
+COPY target/${JAR_FILE} /opt/server/${JAR_FILE}
+# COPY target/docker-test-server.jar docker-test-server.jar
 
 # Expose ports
 EXPOSE 8100
 
-# Run Spring ppliction
-# CMD ["java", "-jar", "${JAR_FILE}"]
-CMD ["java", "-jar", "docker-test-server.jar"]
+# Run Spring appliction
+# RUN ["ls", "-lah", "/"]
+# RUN ["ls", "-lah", "/opt"]
+RUN ["ls", "-lah", "/opt/server"]
+CMD ["java", "-jar", "/opt/server/${JAR_FILE}"]
+# CMD ["java", "-jar", "docker-test-server.jar"]
