@@ -6,9 +6,9 @@ MAINTAINER Viktar Lebedzeu <vlebedzeu@gmail.com>
 # ADD target/lib /usr/share/lib
 
 # Copy compiled jar into image
-ARG JAR_FILE=docker-test-server.jar
-COPY target/${JAR_FILE} /opt/server/${JAR_FILE}
-# COPY target/docker-test-server.jar docker-test-server.jar
+# ARG JAR_FILE=docker-test-server.jar
+# COPY target/${JAR_FILE} /opt/server/${JAR_FILE}
+COPY target/docker-test-server.jar /opt/server/docker-test-server.jar
 
 # Expose ports
 EXPOSE 8100
@@ -17,5 +17,5 @@ EXPOSE 8100
 # RUN ["ls", "-lah", "/"]
 # RUN ["ls", "-lah", "/opt"]
 RUN ["ls", "-lah", "/opt/server"]
-CMD ["java", "-jar", "/opt/server/${JAR_FILE}"]
-# CMD ["java", "-jar", "docker-test-server.jar"]
+# CMD ["java", "-jar", "/opt/server/${JAR_FILE}"]
+CMD ["java", "-jar", "/opt/server/docker-test-server.jar"]
