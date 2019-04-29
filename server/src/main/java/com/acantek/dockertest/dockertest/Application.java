@@ -1,4 +1,4 @@
-package com.acantek.dockertest;
+package com.acantek.dockertest.dockertest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
