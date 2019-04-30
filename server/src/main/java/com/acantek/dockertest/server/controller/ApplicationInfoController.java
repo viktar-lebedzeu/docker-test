@@ -1,4 +1,4 @@
-package com.acantek.dockertest.controller;
+package com.acantek.dockertest.server.controller;
 
 import com.acantek.dockertest.dto.ApplicationInfo;
 import org.slf4j.Logger;

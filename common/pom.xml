@@ -11,6 +11,30 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>common</artifactId>
+	<!--<groupId>com.acantek</groupId>-->
+	<artifactId>docker-test-common</artifactId>
+	<name>docker-test-common</name>
+	<description>Docker test common classes</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+			<version>${spring.boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<version>${spring.boot.version}</version>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
 
 </project>
