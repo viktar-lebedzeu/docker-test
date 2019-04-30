@@ -1,8 +1,23 @@
-version: "3"
+version: "3.5"
 services:
-  server:
-    build: server/
+  # Eureka naming service
+  docker-test-eureka-service:
+    container_name: docker-test-eureka-service
+    image: viktarlebedzeu/docker-test-eureka-service:latest
+    expose:
+      - 8761
+    ports:
+      - "8761:8761"
+    network_mode: "host"
+
+  # Server instance: Zuul, Ribbon, Hystrix
+  docker-test-server:
+    container_name: docker-test-server
+    image: viktarlebedzeu/docker-test-server:latest
+    expose:
+      - 8100
     ports:
       - "8100:8100"
-
-
+    network_mode: "host"
+    depends_on:
+      - docker-test-eureka-service

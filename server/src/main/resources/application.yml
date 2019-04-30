@@ -1,8 +1,6 @@
 spring:
   application:
     name: docker-test-server
-  mustache:
-    check-template-location: false
 
 server:
   port: 8100
@@ -12,3 +10,18 @@ application:
   name: ${project.artifactId}
   version: ${project.version}
   description: ${project.description}
+
+eureka:
+  instance:
+    hostname: localhost
+    preferIpAddress: false
+    statusPageUrl: https://${eureka.instance.hostname}:8761/info
+    healthCheckUrl: https://${eureka.instance.hostname}:8761/health
+    homePageUrl: https://${eureka.instance.hostname}:8761
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://${eureka.instance.hostname}:8761/eureka}
