@@ -14,7 +14,7 @@ logging:
 
 eureka:
   instance:
-    preferIpAddress: false
+    preferIpAddress: true
     hostname: localhost
   client:
     registerWithEureka: false

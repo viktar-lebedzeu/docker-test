@@ -13,15 +13,16 @@ application:
 
 eureka:
   instance:
-    hostname: localhost
-    preferIpAddress: false
-    statusPageUrl: https://${eureka.instance.hostname}:8761/info
-    healthCheckUrl: https://${eureka.instance.hostname}:8761/health
-    homePageUrl: https://${eureka.instance.hostname}:8761
+    hostname: docker-test-eureka-service
+    nonSecurePort: 8761
+    preferIpAddress: true
+    statusPageUrl: http://${eureka.instance.hostname}:${eureka.instance.nonSecurePort}/info
+    healthCheckUrl: http://${eureka.instance.hostname}:${eureka.instance.nonSecurePort}/health
+    homePageUrl: http://${eureka.instance.hostname}:${eureka.instance.nonSecurePort}
   client:
     registerWithEureka: true
     fetchRegistry: true
     healthcheck:
       enabled: true
     serviceUrl:
-      defaultZone: ${EUREKA_SERVER:http://${eureka.instance.hostname}:8761/eureka}
+      defaultZone: ${EUREKA_SERVER:http://${eureka.instance.hostname}:${eureka.instance.nonSecurePort}/eureka}
