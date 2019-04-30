@@ -7,8 +7,9 @@ MAINTAINER Viktar Lebedzeu <vlebedzeu@gmail.com>
 
 # Copy compiled jar into image
 # ARG JAR_FILE=docker-test-server.jar
+ARG JAR_FILE
 # COPY target/${JAR_FILE} /opt/server/${JAR_FILE}
-COPY target/docker-test-server.jar /opt/server/docker-test-server.jar
+COPY target/${JAR_FILE} /opt/server/docker-test-server.jar
 
 # Expose ports
 EXPOSE 8100

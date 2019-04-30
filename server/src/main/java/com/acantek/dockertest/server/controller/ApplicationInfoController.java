@@ -1,6 +1,6 @@
 package com.acantek.dockertest.server.controller;
 
-import com.acantek.dockertest.dto.ApplicationInfo;
+import com.acantek.dockertest.common.dto.ApplicationInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

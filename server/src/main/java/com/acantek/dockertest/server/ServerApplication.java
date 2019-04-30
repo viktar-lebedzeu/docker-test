@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * @author Viktar Lebedzeu
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.acantek.dockertest")
 public class ServerApplication {
     public static void main(String... args) {
         SpringApplication.run(ServerApplication.class, args);

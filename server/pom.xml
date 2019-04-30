@@ -118,7 +118,7 @@
 	</dependencyManagement>
 
 	<build>
-		<finalName>${project.artifactId}</finalName>
+		<!--<finalName>${project.artifactId}</finalName>-->
 
 		<resources>
 			<resource>
@@ -161,7 +161,7 @@
 								<contextDir>${basedir}</contextDir>
 								<dockerFile>Dockerfile</dockerFile>
 								<args>
-									<JAR_FILE>${project.artifactId}.${project.packaging}</JAR_FILE>
+									<JAR_FILE>${project.build.finalName}.${project.packaging}</JAR_FILE>
 								</args>
 							</build>
 						</image>
