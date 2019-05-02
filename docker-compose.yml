@@ -26,6 +26,54 @@ services:
     depends_on:
       - docker-test-eureka-service
 
+  # Entry point REST processors
+  docker-test-entry-01:
+    container_name: docker-test-entry-01
+    image: viktarlebedzeu/docker-test-entry:latest
+#    expose:
+#      - 8201
+    ports:
+      - "8201:8201"
+#    network_mode: "host"
+    networks:
+      - localtest
+    depends_on:
+      - docker-test-eureka-service
+    environment:
+      SERVICE_ID: "entry_01"
+      SERVICE_PORT: 8201
+
+  docker-test-entry-02:
+    container_name: docker-test-entry-02
+    image: viktarlebedzeu/docker-test-entry:latest
+#    expose:
+#      - 8200
+    ports:
+      - "8202:8202"
+#    network_mode: "host"
+    networks:
+      - localtest
+    depends_on:
+      - docker-test-eureka-service
+    environment:
+      SERVICE_ID: "entry_02"
+      SERVICE_PORT: 8202
+
+#  docker-test-entry-03:
+#    container_name: docker-test-entry-03
+#    image: viktarlebedzeu/docker-test-entry:latest
+#    expose:
+#      - 8200
+#    ports:
+#      - "8200:8203"
+##    network_mode: "host"
+#    networks:
+#      - localtest
+#    depends_on:
+#      - docker-test-eureka-service
+#    environment:
+#      - SERVICE_ID = entry_03
+
 networks:
   localtest:
     driver: bridge

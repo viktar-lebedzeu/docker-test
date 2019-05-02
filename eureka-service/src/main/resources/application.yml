@@ -13,6 +13,7 @@ logging:
         discovery: OFF
 
 eureka:
+  environment: "default"
   instance:
     preferIpAddress: true
     hostname: localhost

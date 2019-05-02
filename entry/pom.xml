@@ -2,16 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
 	<modelVersion>4.0.0</modelVersion>
-
-<!--
-	<parent>
-		<artifactId>docker-test</artifactId>
-		<groupId>com.acantek</groupId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
--->
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -21,12 +12,12 @@
 	</parent>
 
 	<groupId>com.acantek</groupId>
-	<artifactId>docker-test-server</artifactId>
+	<artifactId>docker-test-entry</artifactId>
 	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<description>
-		Server subproject. Contains server-wide configurations, e.g. balance loading, naming, health checking etc.
+		Sub-project of entry point controllers that process incoming http requests.
 	</description>
 
 	<properties>
@@ -84,19 +75,35 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-hystrix</artifactId>
+			<version>${spring.cloud.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-ribbon</artifactId>
+			<version>${spring.cloud.version}</version>
+		</dependency>
+<!--
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-zuul</artifactId>
 			<version>${spring.cloud.version}</version>
 		</dependency>
+-->
+<!--
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
 			<version>${spring.cloud.version}</version>
 		</dependency>
+-->
+<!--
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-netflix-turbine</artifactId>
 			<version>${spring.cloud.version}</version>
 		</dependency>
+-->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -138,8 +145,6 @@
 	</dependencyManagement>
 
 	<build>
-		<!--<finalName>${project.artifactId}</finalName>-->
-
 		<resources>
 			<resource>
 				<directory>${basedir}/src/main/resources</directory>
@@ -158,11 +163,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
 				<configuration>
-					<!--
-					<delimiters>
-						<delimiter>@</delimiter>
-					</delimiters>
-					-->
 					<useDefaultDelimiters>true</useDefaultDelimiters>
 				</configuration>
 			</plugin>
@@ -192,47 +192,6 @@
 					</images>
 				</configuration>
 			</plugin>
-
-<!--
-			<plugin>
-				<groupId>io.fabric8</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<version>${docker.maven.version}</version>
-				<configuration>
-					<verbose>true</verbose>
-					<images>
-						<image>
-							<alias>docker-test-server</alias>
-							<name>viktarlebedzeu/${project.artifactId}:${project.version}</name>
-							<build>
-								<from>openjdk:8-stretch</from>
-								<maintainer>Viktar Lebedzeu &lt;vlebedzeu@gmail.com&gt;</maintainer>
-								<tags>
-									<tag>${project.version}</tag>
-									<tag>latest</tag>
-								</tags>
-								<assembly>
-									<name>target</name>
-									<targetDir>/opt/server</targetDir>
-									<descriptorRef>artifact</descriptorRef>
-								</assembly>
-								<runCmds>
-									<run>ls -lah /opt/server</run>
-								</runCmds>
-								<optimise>true</optimise>
-								<ports>
-									<port>8100/tcp</port>
-								</ports>
-								<cmd>
-									<shell>java -jar /opt/server/${project.build.finalName}.jar</shell>
-								</cmd>
-							</build>
-						</image>
-					</images>
-				</configuration>
-			</plugin>
--->
 		</plugins>
 	</build>
-
 </project>

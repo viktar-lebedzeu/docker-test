@@ -1,16 +1,16 @@
 spring:
   application:
-    name: docker-test-server
+    name: docker-test-entry
 
 server:
-  port: 8100
+  port: ${SERVICE_PORT:8200}
 
 application:
   groupId: ${project.groupId}
   name: ${project.artifactId}
   version: ${project.version}
   description: ${project.description}
-  serviceId: ${SERVICE_ID:server}
+  serviceId: ${SERVICE_ID:entry-service}
 
 eureka:
   instance:
@@ -26,9 +26,3 @@ eureka:
     eurekaServerPort: 8761
     serviceUrl:
       defaultZone: ${EUREKA_SERVER_URL:http://${eureka.client.proxyHost}:${eureka.client.eurekaServerPort}/eureka}
-
-zuul:
-  routes:
-    entry:
-      path: /entry/**
-      serviceId: docker-test-entry

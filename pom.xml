@@ -8,6 +8,7 @@
 		<module>server</module>
 		<module>common</module>
 		<module>eureka-service</module>
+		<module>entry</module>
 	</modules>
 
 	<groupId>com.acantek</groupId>
