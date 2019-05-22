@@ -35,7 +35,9 @@
 		<java.version>1.8</java.version>
 
 		<spring.boot.version>2.1.4.RELEASE</spring.boot.version>
-		<spring.cloud.version>1.4.6.RELEASE</spring.cloud.version>
+		<spring.cloud.version>2.1.2.RELEASE</spring.cloud.version>
+		<spring.cloud.netflix.version>2.1.1.RELEASE</spring.cloud.netflix.version>
+		<spring.cloud.zuul.version>1.4.6.RELEASE</spring.cloud.zuul.version>
 		<spring.cloud.dependencies.version>Greenwich.RELEASE</spring.cloud.dependencies.version>
 
 		<!-- 3rd party libraries versions -->
@@ -80,22 +82,22 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-			<version>${spring.cloud.version}</version>
+			<version>${spring.cloud.netflix.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-zuul</artifactId>
-			<version>${spring.cloud.version}</version>
+			<version>${spring.cloud.zuul.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
-			<version>${spring.cloud.version}</version>
+			<version>${spring.cloud.zuul.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-netflix-turbine</artifactId>
-			<version>${spring.cloud.version}</version>
+			<version>${spring.cloud.netflix.version}</version>
 		</dependency>
 
 		<dependency>

@@ -1,0 +1,16 @@
+version: "3.5"
+services:
+  # Config
+  docker-test-config:
+    container_name: docker-test-config
+    image: viktarlebedzeu/docker-test-config:latest
+    expose:
+      - 9000
+    ports:
+      - "9000:9000"
+    networks:
+      - localtest
+
+networks:
+  localtest:
+    driver: bridge
