@@ -39,6 +39,8 @@ services:
     depends_on:
       - docker-test-config
       - docker-test-eureka-service
+    environment:
+      CONFIG_SERVER_URL: http://docker-test-config:9000/
 
   # Entry point REST processors
   docker-test-entry-01:

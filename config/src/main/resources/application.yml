@@ -10,6 +10,7 @@ spring:
           skipSslValidation: true
           force-pull: true
           searchPaths: '{application}'
+      enabled: false
 
 server:
   port: 9000

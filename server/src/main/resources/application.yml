@@ -1,34 +1,6 @@
-spring:
-  application:
-    name: docker-test-server
-
-server:
-  port: 8100
-
 application:
   groupId: ${project.groupId}
   name: ${project.artifactId}
   version: ${project.version}
   description: ${project.description}
   serviceId: ${SERVICE_ID:server}
-
-eureka:
-  instance:
-    preferIpAddress: true
-    leaseRenewalIntervalInSeconds: 10
-    leaseExpirationDurationInSeconds: 30
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    healthcheck:
-      enabled: true
-    proxyHost: docker-test-eureka-service
-    eurekaServerPort: 8761
-    serviceUrl:
-      defaultZone: ${EUREKA_SERVER_URL:http://${eureka.client.proxyHost}:${eureka.client.eurekaServerPort}/eureka}
-
-zuul:
-  routes:
-    entry:
-      path: /entry/**
-      serviceId: docker-test-entry
