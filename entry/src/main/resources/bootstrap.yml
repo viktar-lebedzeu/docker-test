@@ -1,6 +1,6 @@
 spring:
   application:
-    name: docker-test-server
+    name: docker-test-entry
 
   cloud:
     config:
@@ -11,4 +11,4 @@ spring:
       overrideSystemProperties: false
 
 server:
-  port: 8100
+  port: ${SERVICE_PORT:8200}

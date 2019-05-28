@@ -1,6 +1,0 @@
-eureka:
-  client:
-    proxyHost: localhost
-#eureka:
-#  instance:
-#    hostname: localhost
