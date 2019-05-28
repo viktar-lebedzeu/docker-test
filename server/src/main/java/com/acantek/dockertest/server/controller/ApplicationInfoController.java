@@ -29,10 +29,10 @@ public class ApplicationInfoController {
     private final ApplicationInfo applicationInfo;
     private final DiscoveryClient discoveryClient;
 
-    @Value("${application.descriptionMessage}")
+    @Value("${application.descriptionMessage:}")
     private String appDescriptionMessage;
 
-    @Value("${eureka.client.proxyHost}")
+    @Value("${eureka.client.proxyHost:localhost}")
     private String eurekaClientHost;
 
     @Autowired

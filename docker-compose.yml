@@ -10,6 +10,8 @@ services:
       - "9000:9000"
     networks:
       - localtest
+    environment:
+      SPRING_PROFILES_ACTIVE: "docker"
 
   # Eureka naming service
   docker-test-eureka-service:
@@ -41,6 +43,7 @@ services:
       - docker-test-eureka-service
     environment:
       CONFIG_SERVER_URL: http://docker-test-config:9000/
+      SPRING_PROFILES_ACTIVE: "docker"
 
   # Entry point REST processors
   docker-test-entry-01:
@@ -57,6 +60,7 @@ services:
       - docker-test-config
       - docker-test-eureka-service
     environment:
+      SPRING_PROFILES_ACTIVE: "docker"
       SERVICE_ID: "entry_01"
       SERVICE_PORT: 8201
 
@@ -74,6 +78,7 @@ services:
       - docker-test-config
       - docker-test-eureka-service
     environment:
+      SPRING_PROFILES_ACTIVE: "docker"
       SERVICE_ID: "entry_02"
       SERVICE_PORT: 8202
 
