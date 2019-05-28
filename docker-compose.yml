@@ -12,6 +12,11 @@ services:
       - localtest
     environment:
       SPRING_PROFILES_ACTIVE: "docker"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000"]
+      interval: 30s
+      timeout: 10s
+      retries: 6
 
   # Eureka naming service
   docker-test-eureka-service:
@@ -24,8 +29,11 @@ services:
 #    network_mode: "host"
     networks:
       - localtest
-    depends_on:
-      - docker-test-config
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761"]
+      interval: 30s
+      timeout: 10s
+      retries: 6
 
   # Server instance: Zuul, Ribbon, Hystrix
   docker-test-server:
@@ -41,6 +49,10 @@ services:
     depends_on:
       - docker-test-config
       - docker-test-eureka-service
+    links:
+      - docker-test-config
+      - docker-test-eureka-service
+    restart: on-failure
     environment:
       CONFIG_SERVER_URL: http://docker-test-config:9000/
       SPRING_PROFILES_ACTIVE: "docker"
@@ -59,8 +71,13 @@ services:
     depends_on:
       - docker-test-config
       - docker-test-eureka-service
+    links:
+      - docker-test-config
+      - docker-test-eureka-service
+    restart: on-failure
     environment:
       SPRING_PROFILES_ACTIVE: "docker"
+      CONFIG_SERVER_URL: http://docker-test-config:9000/
       SERVICE_ID: "entry_01"
       SERVICE_PORT: 8201
 
@@ -77,8 +94,13 @@ services:
     depends_on:
       - docker-test-config
       - docker-test-eureka-service
+    links:
+      - docker-test-config
+      - docker-test-eureka-service
+    restart: on-failure
     environment:
       SPRING_PROFILES_ACTIVE: "docker"
+      CONFIG_SERVER_URL: http://docker-test-config:9000/
       SERVICE_ID: "entry_02"
       SERVICE_PORT: 8202
 

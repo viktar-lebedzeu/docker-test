@@ -15,7 +15,7 @@ eureka:
     fetchRegistry: true
     healthcheck:
       enabled: true
-    proxyHost: docker-test-eureka-service
+    proxyHost: localhost
     eurekaServerPort: 8761
     serviceUrl:
       defaultZone: ${EUREKA_SERVER_URL:http://${eureka.client.proxyHost}:${eureka.client.eurekaServerPort}/eureka}

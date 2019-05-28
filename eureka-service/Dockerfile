@@ -2,6 +2,10 @@
 FROM openjdk:8-stretch
 MAINTAINER Viktar Lebedzeu <vlebedzeu@gmail.com>
 
+# Installing curl *inux package
+RUN apt-get update
+RUN apt-get install -y curl
+
 # Add Maven dependencies (not shaded into the artifact; Docker-cached)
 # ADD target/lib /usr/share/lib
 

@@ -43,8 +43,8 @@ public class ApplicationInfoController {
 
     @GetMapping("/info")
     public ResponseEntity<ApplicationInfo> getApplicationInfo() {
-        log.info("App description    : {}", appDescriptionMessage);
-        log.info("eureka client host : {}", eurekaClientHost);
+//        log.info("App description    : {}", appDescriptionMessage);
+//        log.info("eureka client host : {}", eurekaClientHost);
         final List<ServiceInstance> clients = discoveryClient.getInstances("docker-test-entry");
         applicationInfo.setServices(clients);
         return new ResponseEntity<>(applicationInfo, HttpStatus.OK);
